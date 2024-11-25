@@ -1,7 +1,7 @@
 const express = require('express');
 const body_parser = require('body-parser');
 const sequelize = require('sequelize');
-
+const cors = require('cors');
 const db = require('./database');
 
 const data_model = require('./model');
@@ -12,6 +12,9 @@ app.use(body_parser.json({extended:false}))
 const port = process.env.PORT;
 console.log(`INFO: port from environment variable: ${port}`);
 
+app.use(cors({
+    origin: '*' // Allow only the React app's port
+  }));
 
 
 app.get('/get',async(req,res) => {
