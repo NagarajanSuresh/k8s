@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function App() {
-  const server_url = "http://localhost:3000"
+  const server_url = "http://localhost:33000"
+  console.log(server_url)
   const [message, setMessage] = useState('');
   const [responseData, setResponseData] = useState(null);
   const [getData, setGetData] = useState([]);
