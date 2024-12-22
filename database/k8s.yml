@@ -39,6 +39,13 @@ spec:
             cpu: "300m"
         ports:
         - containerPort: 80
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: mysql-storage
+      volumes:
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: db-pvc
       imagePullSecrets:
       - name: db-ecr-secret
 ---
@@ -72,3 +79,31 @@ type: Opaque
 data:
   MYSQL_ROOT_PASSWORD: bXlzcWxwYXNzd29yZA==
   MYSQL_DATABASE: main
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: db-pv
+  namespace: database
+spec:
+  capacity:
+    storage: 0.5Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "manual"
+  hostPath:
+    path: /mnt/data/mysql
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-pvc
+  namespace: database
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: "manual"
+  resources:
+    requests:
+      storage: 0.5Gi
