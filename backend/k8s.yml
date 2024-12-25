@@ -22,6 +22,7 @@ spec:
       labels:
         app: backend-server
     spec:
+      serviceAccountName: tempsa
       containers:
       - name: node
         image: 853973692277.dkr.ecr.us-east-1.amazonaws.com/ns2312-be-repo-1:release2
@@ -75,3 +76,11 @@ data:
   DB_PORT: MzMwNg==
   DB_PASSWORD: bXlzcWxwYXNzd29yZA==
   DB_DATABASE: bWFpbg==
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tempsa
+  namespace: backend
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::853973692277:role/ns2312-clustee-s3-access-role
