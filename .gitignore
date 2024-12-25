@@ -4,3 +4,4 @@ backend/node_modules
 provider.tf
 *.tfstate*
 test.tfvars
+kubeconfig.yml

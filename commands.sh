@@ -1,0 +1,2 @@
+# TO generate the kube config file for the eks cluster. Make sure that the profile matches the one specified in .aws/credentials file
+aws eks --region "us-east-1" update-kubeconfig --name ns2312-cluster --kubeconfig ./kubeconfig.yml --profile "limited-admin-853973692277"
