@@ -51,3 +51,13 @@ resource "aws_iam_openid_connect_provider" "oidc" {
   thumbprint_list = [data.tls_certificate.eks.certificates[0].sha1_fingerprint]
   url             = aws_eks_cluster.cluster.identity[0].oidc[0].issuer
 }
+
+module "alb-controller" {
+  source            = "./eks-alb-controller"
+  cluster_name      = "ns2312-cluster"
+  vpc_id            = module.network.vpc_id
+  cluster_endpoint  = aws_eks_cluster.cluster.endpoint
+  cluster_ca_cert   = aws_eks_cluster.cluster.certificate_authority[0].data
+  oidc_provider_arn = aws_iam_openid_connect_provider.oidc.arn
+  oidc_provider_url = aws_iam_openid_connect_provider.oidc.url
+}

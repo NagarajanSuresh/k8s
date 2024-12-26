@@ -61,18 +61,18 @@ resource "aws_eks_node_group" "worker_nodes" {
   ]
 }
 
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners      = ["amazon"]
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
-  }
-}
+# data "aws_ami" "amazon_linux" {
+#   most_recent = true
+#   owners      = ["amazon"]
+#   filter {
+#     name   = "name"
+#     values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+#   }
+# }
 
-resource "aws_launch_template" "worker_nodes_launch_template" {
-  name          = "ns2312-cluster-worker-nodes-launch-template"
-  image_id      = data.aws_ami.amazon_linux.id
-  instance_type = "t3.medium"
-  key_name      = "ns2312-cluster-kp"
-}
+# resource "aws_launch_template" "worker_nodes_launch_template" {
+#   name          = "ns2312-cluster-worker-nodes-launch-template"
+#   image_id      = data.aws_ami.amazon_linux.id
+#   instance_type = "t3.medium"
+#   key_name      = "ns2312-cluster-kp"
+# }
